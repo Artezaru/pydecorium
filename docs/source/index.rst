@@ -4,6 +4,8 @@ Welcome to pydecorium's documentation!
 Description of the package
 --------------------------
 
+``pydecorium`` is a Python package that provides tools to create and use decorators.
+The package ``pydecorium`` also provides some decorators ready to use.
 
 Contents
 --------
@@ -12,6 +14,7 @@ The documentation is divided into the following sections:
 
 - **API Reference**: This section contains the documentation of the package's API.
 - **Usage**: This section contains the documentation of how to use the package.
+- **Examples**: This section contains examples of how to use the package.
 
 .. toctree::
    :maxdepth: 1
@@ -19,6 +22,7 @@ The documentation is divided into the following sections:
 
    ./api
    ./usage
+   ./examples
 
 
 Author
