@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pydecorium.decorators.function_profiler &#8212; pydecorium 0.0.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=47de8214"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pydecorium/decorators/function_profiler';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pydecorium 0.0.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pydecorium.decorators.function_profiler</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pydecorium.decorators.function_profiler</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">..decorator</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decorator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.profiler_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProfilerUtils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.timer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Timer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Memory</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<div class="viewcode-block" id="FunctionProfiler">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FunctionProfiler</span><span class="p">(</span><span class="n">Decorator</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ``FunctionProfiler`` is a :class:`pydecorium.Decorator` that profile the execution of a function such as execution time, memory usage etc.</span>
+<span class="sd">    </span>
+<span class="sd">    Several profiler utils :class:`pydecorium.decorators.ProfilerUtils` can be connected to the ``FunctionProfiler`` according to the user&#39;s needs.</span>
+<span class="sd">    Each profiler utils is used to collect a specific data during the function execution.</span>
+<span class="sd">    For example, the :class:`pydecorium.decorators.Timer` is used to collect the execution time of the function and the :class:`pydecorium.decorators.Memory` is used to collect the memory usage of the function.</span>
+
+<span class="sd">    The various functions and methods decorated with the ``FunctionProfiler`` are identified by their func pointer.</span>
+<span class="sd">    When the report of the profiled data is generated, the function signature name is used to help the user to identify the profiled data.</span>
+<span class="sd">    The `signature_name_format` attribute of this decorator can be used to customize the function signature name (see :class:`pydecorium.Decorator`).</span>
+
+<span class="sd">    The report of the profiled data can be formatted in three different ways: &quot;datetime&quot;, &quot;function&quot;, &quot;cumulative&quot;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    profiler_utils : Union[Type, List[Type]]</span>
+<span class="sd">        The list of sub-classes of the ``ProfilerUtils`` class to connect to the ``FunctionProfiler``.</span>
+<span class="sd">        Default is None.</span>
+<span class="sd">    report_format : str</span>
+<span class="sd">        The format of the string to report the profiled data. (see :meth:`pydecorium.decorators.FunctionProfiler.set_report_format`).</span>
+<span class="sd">        The valid values are: &quot;datetime&quot;, &quot;function&quot;, &quot;cumulative&quot;.</span>
+<span class="sd">        Default is &quot;datetime&quot;. </span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    report_format : str</span>
+<span class="sd">        The format of the string to report the profiled data. (see :meth:`pydecorium.decorators.FunctionProfiler.set_report_format`).</span>
+
+<span class="sd">    profiled_functions : List[Callable]</span>
+<span class="sd">        The list containing the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+
+<span class="sd">    profiled_functions_signature_name : List[str]</span>
+<span class="sd">        The list containing the signature name of the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+
+<span class="sd">    connected_profiler_utils : List[ProfilerUtils]</span>
+<span class="sd">        The list of the connected ``ProfilerUtils`` to the ``FunctionProfiler``.</span>
+
+<span class="sd">    profiled_data : List[List]</span>
+<span class="sd">        The list of the profiled data containing the datetime, the index of the function and the data collected by the connected ``ProfilerUtils``. The data are a dictionary with the index of the connected ``ProfilerUtils`` as key and the data collected as value.</span>
+
+<span class="sd">    report : str</span>
+<span class="sd">        The string reporting the profiled data according to the selected ``report_format``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">correct_report_format</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;cumulative&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profiler_utils</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">report_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disconnect_all</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_profiler_utils</span><span class="p">(</span><span class="n">profiler_utils</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span> <span class="o">=</span> <span class="n">report_format</span>
+
+    <span class="c1"># Properties getters and setters</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_report_format</span>
+
+    <span class="nd">@report_format</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">report_format</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The report_format must be a string.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">report_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">correct_report_format</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The report_format must be one of the following: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">correct_report_format</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_report_format</span> <span class="o">=</span> <span class="n">report_format</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">profiled_functions</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">profiled_functions_signature_name</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_signature_name</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connected_profiler_utils</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">profiled_data</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_data</span>
+
+    <span class="c1"># Decorator log format (other way around)</span>
+<div class="viewcode-block" id="FunctionProfiler.set_report_format">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.set_report_format">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_report_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the ``report_format`` of the ``FunctionProfiler``.</span>
+<span class="sd">        The report format is used to format the string to report the profiled data.</span>
+
+<span class="sd">        .. note:: </span>
+
+<span class="sd">            The format can also be set using the ``report_format`` attribute.</span>
+
+<span class="sd">        .. important::</span>
+
+<span class="sd">            The correct format are: &quot;datetime&quot;, &quot;function&quot;, &quot;cumulative&quot;. (see below)</span>
+
+<span class="sd">            If the ``report_format`` is set to &quot;datetime&quot;, the reported string will be formatted as follows:</span>
+
+<span class="sd">            .. code-block:: console</span>
+<span class="sd">            </span>
+<span class="sd">                [datetime] - [function_signature_name] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                [datetime] - [other_function_signature_name] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                [datetime] - [function_signature_name] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                </span>
+<span class="sd">            If the ``report_format`` is set to &quot;function&quot;, the reported string will be formatted as follows:</span>
+
+<span class="sd">            .. code-block:: console</span>
+
+<span class="sd">                [function_signature_name]</span>
+<span class="sd">                    [datetime] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                    [datetime] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                [other_function_signature_name]</span>
+<span class="sd">                    [datetime] - data_name : data - other_data_name : other_data</span>
+<span class="sd">                    [datetime] - data_name : data - other_data_name : other_data</span>
+
+<span class="sd">            If the ``report_format`` is set to &quot;cumulative&quot;, the reported string will be formatted as follows:</span>
+
+<span class="sd">            .. code-block:: console</span>
+
+<span class="sd">                [function_signature_name] - N calls - data_name : cumulative_data - other_data_name : cumulative_other_date</span>
+<span class="sd">                [other_function_signature_name] - N calls - data_name : cumulative_data - other_data_name : cumulative_other_date</span>
+
+<span class="sd">            .. warning::</span>
+<span class="sd">                The `cumulative` reported format can&#39;t be use if the linked ``FunctionProfiler`` returns non-numeric data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        report_format : str</span>
+<span class="sd">            The format of the string to report the profiled data.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If the report_format is not a string.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the report_format is not in the correct log format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span> <span class="o">=</span> <span class="n">report_format</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.get_report_format">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.get_report_format">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_report_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the format of the string to report the profiled data.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">        </span>
+<span class="sd">            The reported format can also be get using the &#39;report_format&#39; attribute.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The format of the string to report the profiled data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.extract_loggeg_functions">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.extract_loggeg_functions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_loggeg_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts the list containing the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+<span class="sd">        The list is sorted by the order of the function calls.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The list can also be get using the &#39;profiled_functions&#39; attribute.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[Callable]</span>
+<span class="sd">            The list containing the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiled_functions</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.extract_loggeg_functions_signature_name">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.extract_loggeg_functions_signature_name">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_loggeg_functions_signature_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts the list containing the signature name of the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+<span class="sd">        The list is sorted by the order of the function calls.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The list can also be get using the &#39;profiled_functions_signature_name&#39; attribute.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[str]</span>
+<span class="sd">            The list containing the signature name of the functions/methods actually profiled by the ``FunctionProfiler``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiled_functions_signature_name</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.extract_connected_profiler_utils">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.extract_connected_profiler_utils">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_connected_profiler_utils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ProfilerUtils</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts the list of the connected ``ProfilerUtils`` to the ``FunctionProfiler``.</span>
+<span class="sd">        Note that the list contains the instances of the connected ``ProfilerUtils`` and not the classes.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The list can also be get using the &#39;connected_profiler_utils&#39; attribute.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[ProfilerUtils]</span>
+<span class="sd">            The list of the connected ``ProfilerUtils`` to the ``FunctionProfiler``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected_profiler_utils</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.extract_profiled_data">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.extract_profiled_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_profiled_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts the list of the profiled data containing the datetime, the function and the data collected by the connected ``ProfilerUtils``.</span>
+<span class="sd">        The list is sorted by the order of the function calls.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The list can also be get using the &#39;profiled_data&#39; attribute.</span>
+
+<span class="sd">        The structure of the list is as follows:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            profiled_data = [[datetime, function_index, {utils_index: data, utils_index: data, ...}], ...]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[List]</span>
+<span class="sd">            The list of the profiled data containing the datetime, the index of the function and the data collected by the connected ``ProfilerUtils``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiled_data</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.extract_profiled_data_reorganized_by_function">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.extract_profiled_data_reorganized_by_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_profiled_data_reorganized_by_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reorganizes the profiled data by function.</span>
+
+<span class="sd">        For example, the profiled data:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            data = [[datetime, function_index_1, {utils_index: data, utils_index: data, ...}],</span>
+<span class="sd">                    [datetime, function_index_2, {utils_index: data, utils_index: data, ...}],</span>
+<span class="sd">                    [datetime, function_index_1, {utils_index: data, utils_index: data, ...}], ...]</span>
+<span class="sd">        </span>
+<span class="sd">        becomes:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            data = {function_index_1: [[datetime, {utils_index: data, utils_index: data, ...}],</span>
+<span class="sd">                                    [datetime, {utils_index: data, utils_index: data, ...}], ...],</span>
+<span class="sd">                    function_index_2: [[datetime, {utils_index: data, utils_index: data, ...}], ...], ...}</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Dict[int, List[List]]</span>
+<span class="sd">            The profiled data reorganized by function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reorganized_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_data</span><span class="p">:</span>
+            <span class="n">function_index</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">function_index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reorganized_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">reorganized_data</span><span class="p">[</span><span class="n">function_index</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">reorganized_data</span><span class="p">[</span><span class="n">function_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">log</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">log</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">reorganized_data</span></div>
+
+
+    <span class="c1"># FunctionProfiler methods</span>
+<div class="viewcode-block" id="FunctionProfiler.initialize">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.initialize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the ``FunctionProfiler`` by removing all the profiled data.</span>
+
+<span class="sd">        The connected profiler utils are not removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.disconnect_all">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.disconnect_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disconnect_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnects all the profiler utils connected to the ``FunctionProfiler``.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The profiled data are removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="FunctionProfiler.connect_profiler_utils">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.connect_profiler_utils">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_profiler_utils</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profiler_utils</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connects a sub-class of the ``ProfilerUtils`` class to the ``FunctionProfiler``.</span>
+<span class="sd">        If a logger utils is None, it will be ignored.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        profiler_utils : Union[Type, List[Type]]</span>
+<span class="sd">            The sub-class of the ``ProfilerUtils`` class to connect to the ``FunctionProfiler``.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If the logger is not an instance of ``ProfilerUtils`` or a list of ``FunctionProfiler``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Recursively connect the logger</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">profiler_utils</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">utils</span> <span class="ow">in</span> <span class="n">profiler_utils</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connect_profiler_utils</span><span class="p">(</span><span class="n">utils</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">profiler_utils</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">profiler_utils</span><span class="p">,</span> <span class="n">ProfilerUtils</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The profiler utils must be a sub-class of ProfilerUtils.&quot;</span><span class="p">)</span>
+            <span class="c1"># Testing if the profiler utils is already connected</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">utils</span><span class="p">,</span> <span class="n">profiler_utils</span><span class="p">)</span> <span class="k">for</span> <span class="n">utils</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">profiler_utils</span><span class="p">())</span> <span class="c1"># Add an instance of the profiler utils. It will be used to collect the data.</span></div>
+
+    
+    <span class="c1"># Wrapper method</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the profiled data of the function execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Test if the function is already profiled</span>
+        <span class="n">function_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">function_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">[</span><span class="n">function_index</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">func</span><span class="p">):</span>
+            <span class="n">function_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">function_index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="c1"># Pre-execute</span>
+        <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">utils</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">):</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">pre_execute</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Execute the function</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Post-execute</span>
+        <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">utils</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">):</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">post_execute</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Handle the logged data</span>
+        <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">utils</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">handle_result</span><span class="p">()</span>
+        <span class="c1"># Append the logged data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">date</span><span class="p">,</span> <span class="n">function_index</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>        
+        <span class="k">return</span> <span class="n">outputs</span>
+
+    <span class="c1"># Report methods</span>
+<div class="viewcode-block" id="FunctionProfiler.generate_report_datetime">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.generate_report_datetime">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the report of the ``FunctionProfiler`` in the &quot;datetime&quot; format.</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">            :func:`pydecorium.decorators.FunctionProfiler.set_report_format()`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The report of the ``FunctionProfiler`` in the &quot;datetime&quot; format.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled_data</span><span class="p">:</span>
+            <span class="c1"># Extract the data</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">function_index</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="c1"># Extract the function signature name</span>
+            <span class="n">function_signature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signature_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">[</span><span class="n">function_index</span><span class="p">])</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">] - [</span><span class="si">{</span><span class="n">function_signature_name</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="c1"># Writting the data</span>
+            <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">data_value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">utils</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span>
+                <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">utils</span><span class="o">.</span><span class="n">string_result</span><span class="p">(</span><span class="n">data_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">report</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.generate_report_function">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.generate_report_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the report of the ``FunctionProfiler`` in the &quot;function&quot; format.</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">            :func:`pydecorium.decorators.FunctionProfiler.set_report_format()`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The report of the ``FunctionProfiler`` in the &quot;function&quot; format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># Reorganize the data by function</span>
+        <span class="n">reorganized_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_profiled_data_reorganized_by_function</span><span class="p">()</span>
+        <span class="c1"># Write the report</span>
+        <span class="k">for</span> <span class="n">function_index</span><span class="p">,</span> <span class="n">logs</span> <span class="ow">in</span> <span class="n">reorganized_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Extract the function signature name</span>
+            <span class="n">function_signature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signature_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">[</span><span class="n">function_index</span><span class="p">])</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">function_signature_name</span><span class="si">}</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="c1"># Read the data</span>
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">:</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">[</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">]&quot;</span>
+                <span class="c1"># Writting the data</span>
+                <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">data_value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">utils</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span>
+                    <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">utils</span><span class="o">.</span><span class="n">string_result</span><span class="p">(</span><span class="n">data_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">report</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">report</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.generate_report_cumulative">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.generate_report_cumulative">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report_cumulative</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the report of the ``FunctionProfiler`` in the &quot;cumulative&quot; format.</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">            :func:`pydecorium.decorators.FunctionProfiler.set_report_format()`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The report of the ``FunctionProfiler`` in the &quot;cumulative&quot; format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># Reorganize the data by function</span>
+        <span class="n">reorganized_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_profiled_data_reorganized_by_function</span><span class="p">()</span>
+        <span class="c1"># Write the report</span>
+        <span class="k">for</span> <span class="n">function_index</span><span class="p">,</span> <span class="n">logs</span> <span class="ow">in</span> <span class="n">reorganized_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Extract the function signature name</span>
+            <span class="n">function_signature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signature_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_profiled_functions</span><span class="p">[</span><span class="n">function_index</span><span class="p">])</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">function_signature_name</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="c1"># Read the data</span>
+            <span class="n">calls</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span>
+            <span class="n">cumulative_data</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">data_value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">utils_index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cumulative_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">cumulative_data</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">cumulative_data</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">data_value</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">calls</span><span class="si">}</span><span class="s2"> calls&quot;</span>
+            <span class="k">for</span> <span class="n">utils_index</span><span class="p">,</span> <span class="n">data_value</span> <span class="ow">in</span> <span class="n">cumulative_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">utils</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected_profiler_utils</span><span class="p">[</span><span class="n">utils_index</span><span class="p">]</span>
+                <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">utils</span><span class="o">.</span><span class="n">string_result</span><span class="p">(</span><span class="n">data_value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">report</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">report</span></div>
+
+
+<div class="viewcode-block" id="FunctionProfiler.generate_report">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.generate_report">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the report of the ``FunctionProfiler`` according to the log format.</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">            :func:`pydecorium.decorators.FunctionProfiler.set_report_format()`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The report of the ``FunctionProfiler`` in the specified log format.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span> <span class="o">==</span> <span class="s2">&quot;datetime&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_report_datetime</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_report_function</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_format</span> <span class="o">==</span> <span class="s2">&quot;cumulative&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_report_cumulative</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="FunctionProfiler.write_report">
+<a class="viewcode-back" href="../../../api_doc/function_profiler.html#pydecorium.decorators.FunctionProfiler.write_report">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes the report of the ``FunctionProfiler`` in a file at the specified path according to the selected ``report_format``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_path : str</span>
+<span class="sd">            The path of the file where the report will be written.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">generate_report</span><span class="p">())</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_report</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_report</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-%Y, Artezaru.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
