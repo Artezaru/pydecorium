@@ -22,13 +22,13 @@ class Timer(ProfilerUtils):
         """
         Initializes the timer before the function execution.
         """
-        self.tic = time.time()
+        self.tic = time.perf_counter()
 
     def post_execute(self, func, *args, **kwargs) -> None:
         """
         Computes the runtime after the function execution.
         """
-        self.toc = time.time()
+        self.toc = time.perf_counter()
     
     def handle_result(self) -> float:
         """
