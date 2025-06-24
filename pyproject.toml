@@ -24,7 +24,7 @@ include = ["pydecorium", "pydecorium*"]
 exclude = ["laboratory", "laboratory.*", "tests", "tests*", "examples", "examples*"]
 
 [tool.setuptools.package-data]
-"pydecorium.ressources" = ["*"]
+"pydecorium.resources" = ["*"]
 
 [project.scripts]
 pydecorium = "pydecorium.__main__:__main__"
