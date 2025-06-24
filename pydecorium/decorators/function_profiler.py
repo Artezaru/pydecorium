@@ -73,19 +73,19 @@ class FunctionProfiler(Decorator):
         self._report_format = report_format
 
     @property
-    def profiled_functions():
+    def profiled_functions(self):
         return self._profiled_functions
 
     @property
-    def profiled_functions_signature_name():
+    def profiled_functions_signature_name(self):
         return [self.get_signature_name(func) for func in self._profiled_functions]
 
     @property
-    def connected_profiler_utils():
+    def connected_profiler_utils(self):
         return self._connected_profiler_utils
 
     @property
-    def profiled_data():
+    def profiled_data(self):
         return self._profiled_data
 
     # Decorator log format (other way around)
